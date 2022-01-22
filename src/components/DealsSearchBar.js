@@ -1,8 +1,14 @@
 import React from 'react';
 
-function DealsSearchBar() {
+function DealsSearchBar(props) {  
+  const onSearchValueChange = (event) => {
+    props.setSearchValue(event.target.value);
+  };
+
   return <div>
-      <input />
+      <input 
+        value={props.searchValue}
+        onChange={onSearchValueChange}  />
   </div>;
 }
 

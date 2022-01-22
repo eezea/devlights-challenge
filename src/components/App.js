@@ -7,6 +7,20 @@ import DealsSearchBar from "./DealsSearchBar";
 function App() {
   const [deals, setDeals] = React.useState([]);
 
+  const [searchValue, setSearchValue] = React.useState("");
+
+  let searchedDeals = [];
+
+  if (!searchValue.length >= 1) {
+    searchedDeals = deals;
+  } else {
+    searchedDeals = deals.filter((deal) => {
+      const dealTitle = deal.title.toLowerCase();
+      const searchTitle = searchValue.toLowerCase();
+      return dealTitle.includes(searchTitle);
+    });
+  }
+
   const getDeals = async () => {
     try {
       const response = await axios.get('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15');
@@ -25,12 +39,14 @@ function App() {
     <div className="bg-stone-900 h-screen p-5 overflow-y-scroll">
       <header>
         <h1>Deals Showcase App</h1>
-        <DealsSearchBar />
+        <DealsSearchBar 
+          searchValue={searchValue}
+          setSearchValue={setSearchValue} />
       </header>
       
       <section>
         <DealsShowCase>
-          {deals.map((deal, index)=>(
+          {searchedDeals.map((deal, index)=>(
             <DealCard 
               savings={deal.savings} 
               thumb={deal.thumb} 
