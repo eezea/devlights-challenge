@@ -24,7 +24,6 @@ function App() {
   const getDeals = async () => {
     try {
       const response = await axios.get('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15');
-      console.log(response.data);
       setDeals(response.data);
     } catch (error) {
       console.log(error);
@@ -36,8 +35,8 @@ function App() {
   },[])
 
   return (
-    <div className="bg-stone-900 h-screen p-5 overflow-y-scroll">
-      <header>
+    <div className="bg-stone-900 h-screen overflow-y-scroll">
+      <header className="bg-black w-screen h-20 shadow-md shadow-stone-400/10">
         <h1>Deals Showcase App</h1>
         <DealsSearchBar 
           searchValue={searchValue}
@@ -55,10 +54,9 @@ function App() {
               normalPrice={deal.normalPrice}
               salePrice={deal.salePrice}
               key={index}
-            />
-          ))}
+            />))}
         </DealsShowCase>
-      </section>
+        </section>
 
       <footer>
         <p>Zack Fytc</p>
