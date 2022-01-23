@@ -11,7 +11,7 @@ function App() {
 
   const [searchValue, setSearchValue] = React.useState("");
 
-  const [totalSales, setTotalSales] = React.useState(0);
+  // const [totalSales, setTotalSales] = React.useState(0);
 
   let searchedDeals = [];
 
@@ -25,15 +25,29 @@ function App() {
     });
   }
 
-  let selectedDeals = [];
-  //TODO: selected deals counter and totalizer
+  let selectedDeals = deals.filter((deal) => deal.isSelected);
+  let dealsCounter = selectedDeals.length;
+  let dealsTotalSales = 0;
+  selectedDeals.forEach((deal) => {
+    dealsTotalSales += Number(deal.salePrice);
+  });
+
+  const selectDeal = (gameID) => {
+    const dealIndex = deals.findIndex((deal) => deal.gameID === gameID);
+    const newDeals = [...deals];
+    newDeals[dealIndex].isSelected = !newDeals[dealIndex].isSelected;
+    setDeals(newDeals);
+  };
 
   const getDeals = async () => {
     try {
       const response = await axios.get(
         "https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15"
       );
-      setDeals(response.data);
+      const localDeals = response.data.map((deal) => {
+        return { ...deal, isSelected: false };
+      });
+      setDeals(localDeals);
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +77,10 @@ function App() {
             searchValue={searchValue}
             setSearchValue={setSearchValue}
           />
-          <DealsCart />
+          <DealsCart
+            dealsCounter={dealsCounter}
+            dealsTotalSales={dealsTotalSales.toFixed(2)}
+          />
         </div>
       </header>
 
@@ -77,7 +94,9 @@ function App() {
               steamRatingPercent={deal.steamRatingPercent}
               normalPrice={deal.normalPrice}
               salePrice={deal.salePrice}
+              isSelected={deal.isSelected}
               key={index}
+              onSelect={() => selectDeal(deal.gameID)}
             />
           ))}
         </DealsShowCase>
