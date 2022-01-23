@@ -5,10 +5,14 @@ import DealCard from "./DealCard";
 import DealsSearchBar from "./DealsSearchBar";
 import DealsCart from "./DealsCart";
 import { LightningBoltIcon } from "@heroicons/react/outline";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import DealsLoading from "./DealsLoading";
+import ErrorMessage from "./ErrorMessage";
 
 function App() {
-  const [deals, setDeals] = useLocalStorage("DEALS_V1", []);
+  const [deals, setDeals] = React.useState([]);
+
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState(false);
 
   const [searchValue, setSearchValue] = React.useState("");
 
@@ -50,8 +54,13 @@ function App() {
           starsFilled: Math.round(deal.steamRatingPercent / 20),
         };
       });
+      setError(false);
       setDeals(localDeals);
+      console.log(localDeals);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
+      setError(true);
       console.log(error);
     }
   };
@@ -70,7 +79,10 @@ function App() {
         py-4 md:py-0 px-10 bg-black w-full sm:h-44 md:h-20 shadow-md shadow-stone-400/10
         select-none"
       >
-        <div className="group flex flex-row items-center justify-center space-x-2">
+        <div
+          className="group flex flex-row items-center justify-center space-x-2 cursor-pointer"
+          onClick={getDeals}
+        >
           <LightningBoltIcon
             className="text-indigo-500 w-12 h-12 
           group-hover:text-rose-500 ease-in duration-300"
@@ -92,26 +104,31 @@ function App() {
       </header>
 
       <section>
-        <DealsShowCase>
-          {searchedDeals.map((deal, index) => (
-            <DealCard
-              savings={deal.savings}
-              thumb={deal.thumb}
-              title={deal.title}
-              starsFilled={deal.starsFilled}
-              normalPrice={deal.normalPrice}
-              salePrice={deal.salePrice}
-              isSelected={deal.isSelected}
-              key={index}
-              onSelect={() => selectDeal(deal.gameID)}
-            />
-          ))}
-        </DealsShowCase>
+        {error && <ErrorMessage />}
+        {isLoading && <DealsLoading />}
+        {!error && !isLoading && (
+          <DealsShowCase>
+            {searchedDeals.map((deal, index) => (
+              <DealCard
+                savings={deal.savings}
+                thumb={deal.thumb}
+                title={deal.title}
+                starsFilled={deal.starsFilled}
+                normalPrice={deal.normalPrice}
+                salePrice={deal.salePrice}
+                isSelected={deal.isSelected}
+                key={index}
+                onSelect={() => selectDeal(deal.gameID)}
+              />
+            ))}
+          </DealsShowCase>
+        )}
       </section>
-
-      <footer className="flex flex-row items-center justify-center bg-black h-20 text-gray-200">
-        <p>Copyright © 2022 - Elías Ezequiel Angélico</p>
-      </footer>
+      {!error && (
+        <footer className="flex flex-row items-center justify-center bg-black h-20 text-gray-200">
+          <p>Copyright © 2022 - Elías Ezequiel Angélico</p>
+        </footer>
+      )}
     </div>
   );
 }
