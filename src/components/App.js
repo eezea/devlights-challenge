@@ -56,7 +56,6 @@ function App() {
       });
       setError(false);
       setDeals(localDeals);
-      console.log(localDeals);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
