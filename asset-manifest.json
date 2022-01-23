@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/devlights-challenge/static/css/main.2c9da0e4.css",
-    "main.js": "/devlights-challenge/static/js/main.1119add0.js",
+    "main.css": "/devlights-challenge/static/css/main.422920c2.css",
+    "main.js": "/devlights-challenge/static/js/main.a89eca23.js",
     "index.html": "/devlights-challenge/index.html",
-    "main.2c9da0e4.css.map": "/devlights-challenge/static/css/main.2c9da0e4.css.map",
-    "main.1119add0.js.map": "/devlights-challenge/static/js/main.1119add0.js.map"
+    "main.422920c2.css.map": "/devlights-challenge/static/css/main.422920c2.css.map",
+    "main.a89eca23.js.map": "/devlights-challenge/static/js/main.a89eca23.js.map"
   },
   "entrypoints": [
-    "static/css/main.2c9da0e4.css",
-    "static/js/main.1119add0.js"
+    "static/css/main.422920c2.css",
+    "static/js/main.a89eca23.js"
   ]
 }
