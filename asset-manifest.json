@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/devlights-challenge/static/css/main.2c9da0e4.css",
+    "main.js": "/devlights-challenge/static/js/main.1119add0.js",
+    "index.html": "/devlights-challenge/index.html",
+    "main.2c9da0e4.css.map": "/devlights-challenge/static/css/main.2c9da0e4.css.map",
+    "main.1119add0.js.map": "/devlights-challenge/static/js/main.1119add0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2c9da0e4.css",
+    "static/js/main.1119add0.js"
+  ]
+}
