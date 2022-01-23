@@ -72,9 +72,9 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-stone-900 w-screen h-screen overflow-y-scroll">
+    <div className="flex flex-col justify-between bg-stone-900 w-screen h-screen overflow-y-auto">
       <header
-        className="flex flex-col md:flex-row items-center space-y-5 md:space-y-0 md:justify-between 
+        className="flex-none flex flex-col md:flex-row items-center space-y-5 md:space-y-0 md:justify-between 
         py-4 md:py-0 px-10 bg-black w-full sm:h-44 md:h-20 shadow-md shadow-stone-400/10
         select-none"
       >
@@ -123,11 +123,10 @@ function App() {
           </DealsShowCase>
         )}
       </section>
-      {!error && (
-        <footer className="flex flex-row items-center justify-center bg-black h-20 text-gray-200">
-          <p>Copyright © 2022 - Elías Ezequiel Angélico</p>
-        </footer>
-      )}
+
+      <footer className="flex-none w-full flex flex-row items-center justify-center bg-black h-20 text-gray-200">
+        <p>Copyright © 2022 - Elías Ezequiel Angélico</p>
+      </footer>
     </div>
   );
 }
