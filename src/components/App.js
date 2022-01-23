@@ -61,14 +61,15 @@ function App() {
     <div className="bg-stone-900 w-screen h-screen overflow-y-scroll">
       <header
         className="flex flex-col md:flex-row items-center space-y-5 md:space-y-0 md:justify-between 
-        py-4 md:py-0 px-10 bg-black w-full h-44 md:h-20 shadow-md shadow-stone-400/10"
+        py-4 md:py-0 px-10 bg-black w-full sm:h-44 md:h-20 shadow-md shadow-stone-400/10
+        select-none"
       >
         <div className="group flex flex-row items-center justify-center space-x-2">
           <LightningBoltIcon
             className="text-indigo-500 w-12 h-12 
           group-hover:text-rose-500 ease-in duration-300"
           />
-          <h1 className="text-3xl lg:text-4xl xl:text-5xl text-slate-200 hover:cursor-default">
+          <h1 className="text-3xl lg:text-4xl xl:text-5xl text-slate-200">
             Deals Showcase
           </h1>
         </div>
