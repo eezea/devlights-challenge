@@ -5,13 +5,12 @@ import DealCard from "./DealCard";
 import DealsSearchBar from "./DealsSearchBar";
 import DealsCart from "./DealsCart";
 import { LightningBoltIcon } from "@heroicons/react/outline";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 function App() {
-  const [deals, setDeals] = React.useState([]);
+  const [deals, setDeals] = useLocalStorage("DEALS_V1", []);
 
   const [searchValue, setSearchValue] = React.useState("");
-
-  // const [totalSales, setTotalSales] = React.useState(0);
 
   let searchedDeals = [];
 
@@ -45,7 +44,11 @@ function App() {
         "https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15"
       );
       const localDeals = response.data.map((deal) => {
-        return { ...deal, isSelected: false };
+        return {
+          ...deal,
+          isSelected: false,
+          starsFilled: Math.round(deal.steamRatingPercent / 20),
+        };
       });
       setDeals(localDeals);
     } catch (error) {
@@ -54,7 +57,10 @@ function App() {
   };
 
   React.useEffect(() => {
-    getDeals();
+    if (dealsCounter === 0) {
+      getDeals();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -92,7 +98,7 @@ function App() {
               savings={deal.savings}
               thumb={deal.thumb}
               title={deal.title}
-              steamRatingPercent={deal.steamRatingPercent}
+              starsFilled={deal.starsFilled}
               normalPrice={deal.normalPrice}
               salePrice={deal.salePrice}
               isSelected={deal.isSelected}
@@ -103,8 +109,8 @@ function App() {
         </DealsShowCase>
       </section>
 
-      <footer>
-        <p>Zack Fytc</p>
+      <footer className="flex flex-row items-center justify-center bg-black h-20 text-gray-200">
+        <p>Copyright © 2022 - Elías Ezequiel Angélico</p>
       </footer>
     </div>
   );
