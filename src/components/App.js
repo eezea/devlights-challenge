@@ -25,6 +25,9 @@ function App() {
     });
   }
 
+  let selectedDeals = [];
+  //TODO: selected deals counter and totalizer
+
   const getDeals = async () => {
     try {
       const response = await axios.get(

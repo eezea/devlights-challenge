@@ -10,7 +10,7 @@ function DealsSearchBar(props) {
     <div
       className="
     flex flex-row items-center h-10 px-2
-    bg-stone-100 border-2  border-red-700 rounded-full"
+    bg-stone-100 border-2  border-indigo-700 rounded-full focus-within:border-3 focus-within:border-rose-700 focus-within:shadow-lg focus-within:shadow-rose-500/50"
     >
       <input
         className="border-none outline-none bg-transparent px-2"
@@ -18,7 +18,7 @@ function DealsSearchBar(props) {
         onChange={onSearchValueChange}
       />
       <div className="flex items-center justify-center">
-        <SearchIcon className="text-rose-700 w-7 h-7" />
+        <SearchIcon className="text-indigo-600 w-7 h-7" />
       </div>
     </div>
   );
