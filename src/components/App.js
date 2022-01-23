@@ -102,7 +102,7 @@ function App() {
         </div>
       </header>
 
-      <section>
+      <section className="grow">
         {error && <ErrorMessage />}
         {isLoading && <DealsLoading />}
         {!error && !isLoading && (
